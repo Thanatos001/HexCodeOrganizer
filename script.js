@@ -1,66 +1,35 @@
-const categories = document.querySelectorAll('.category');
-const mainContent = document.querySelector('.main');
-const addCategoryButton = document.querySelector('.add-category');
-let lastUsedCategory = null;
-let categoriesList = [];
+document.addEventListener("DOMContentLoaded", () => {
+    const createButton = document.querySelector('.create-new');
+    const creationSection = document.querySelector('.creation');
+    const detailsSection = document.querySelector('.details');
 
-addCategoryButton.addEventListener('click', () => {
-    const categoryName = prompt('Enter a new category name:');
-    if (categoryName) {
-        const newCategory = document.createElement('div');
-        newCategory.className = 'category';
-        newCategory.innerHTML = `<h2>${categoryName}</h2>`;
-        categoriesList.push(categoryName);
-        document.querySelector('.categories').appendChild(newCategory);
-    }
-});
-
-categories.forEach((category) => {
-    category.addEventListener('click', () => {
-        const categoryName = category.querySelector('h2').textContent;
-        lastUsedCategory = categoryName;
-        loadContent(categoryName);
+    createButton.addEventListener('click', () => {
+        creationSection.style.display = 'block';
+        detailsSection.style.display = 'none';
     });
-});
 
-function loadContent(categoryName) {
-    // Load content from a separate HTML file or API
-    // For demonstration purposes, we'll just load a static HTML content
-    const content = `
-        <div class="section">
-            <div class="header">
-                <h1>HEX Code Organizer</h1>
-                <div class="back-button">←</div>
-            </div>
-            <div class="content">
-<h2>${categoryName}</h2>
-                <!-- Hex code list will be loaded dynamically -->
-                <ul>
-                    <li>#1F1F22</li>
-                    <li>#2A2D31</li>
-                    <li>#313339</li>
-                    <li>#FCFCFC</li>
-                    <li>#22A55A</li>
-                    <li>#FE6057</li>
-                </ul>
-            </div>
-        </div>
-    `;
-    mainContent.innerHTML = content;
-}
-
-// Load categories from local storage
-if (localStorage.categories) {
-    categoriesList = JSON.parse(localStorage.categories);
-    categoriesList.forEach((category) => {
-        const newCategory = document.createElement('div');
-        newCategory.className = 'category';
-        newCategory.innerHTML = `<h2>${category}</h2>`;
-        document.querySelector('.categories').appendChild(newCategory);
+    const addHexButton = document.querySelector('.add-hex');
+    addHexButton.addEventListener('click', () => {
+        const hexInput = creationSection.querySelector('input[placeholder="Hex Code"]');
+        if (hexInput.value) {
+            const newHex = document.createElement('div');
+            newHex.className = 'hex-preview';
+            newHex.textContent = hexInput.value;
+            creationSection.appendChild(newHex);
+            hexInput.value = '';
+        }
     });
-}
 
-// Save categories to local storage
-document.addEventListener('beforeunload', () => {
-    localStorage.categories = JSON.stringify(categoriesList);
+    const createFolderButton = document.querySelector('.create');
+    createFolderButton.addEventListener('click', () => {
+        const folderName = creationSection.querySelector('input[placeholder="Name"]').value;
+        if (folderName) {
+            const newFolder = document.createElement('div');
+            newFolder.className = 'hex-folder';
+            newFolder.textContent = folderName;
+            document.querySelector('.list').appendChild(newFolder);
+            creationSection.querySelectorAll('input').forEach(input => input.value = '');
+            creationSection.style.display = 'none';
+        }
+    });
 });
