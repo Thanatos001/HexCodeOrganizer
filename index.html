@@ -5,41 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HEX Code Organizer</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json">
 </head>
 <body>
     <div class="container">
         <div class="sidebar">
             <h1>HEX Code Organizer</h1>
-            <div class="search-bar">
-                <input type="text" placeholder="Search...">
+            <input type="text" placeholder="Search...">
+            <div class="last-used">
+                <h2>Last used</h2>
+                <!-- HEX color previews go here -->
             </div>
-            <div class="categories">
-                <div class="category">
-                    <h2>Last used</h2>
-                </div>
-                <div class="category">
-                    <h2>Discord</h2>
-                </div>
-                <!-- Categories will be loaded dynamically -->
+            <div class="list">
+                <h2>List</h2>
+                <select>
+                    <option>Sort by</option>
+                    <option>Date of creation</option>
+                    <option>Alphabetical</option>
+                </select>
+                <!-- HEX folders go here -->
             </div>
-            <button class="add-category">+ Create a new category</button>
+            <button class="create-new">+</button>
         </div>
-        <div class="main">
-            <!-- Content will be loaded dynamically -->
+        <div class="details">
+            <!-- Folder details go here -->
+        </div>
+        <div class="creation">
+            <h2>Create a new folder</h2>
+            <input type="text" placeholder="Name">
+            <input type="text" placeholder="Description">
+            <input type="text" placeholder="Hex Code">
+            <button class="add-hex">+</button>
+            <button class="create">Create</button>
         </div>
     </div>
     <script src="script.js"></script>
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('service-worker.js')
-             .then((registration) => {
-                console.log('Service worker registered:', registration);
-            })
-             .catch((error) => {
-                console.error('Service worker registration failed:', error);
-            });
-        }
-    </script>
 </body>
 </html>
