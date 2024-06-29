@@ -1,22 +1,8 @@
 {
-  "name": "HEX Code Organizer",
-  "short_name": "HEXCO",
-  "theme_color": "#282c34",
-  "background_color": "#282c34",
-  "display": "standalone",
-  "orientation": "portrait",
-  "icons": [
-    {
-      "src": "icon-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "icon-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ],
-  "start_url": "/index.html",
-  "scope": "/"
+    "name": "HEX Code Organizer",
+    "short_name": "HEX Organizer",
+    "start_url": "index.html",
+    "display": "standalone",
+    "background_color": "#333",
+    "description": "Organize your HEX color codes easily."
 }
