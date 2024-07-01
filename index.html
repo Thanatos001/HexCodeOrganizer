@@ -7,41 +7,67 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="sidebar">
-            <h1>HEX Code Organizer</h1>
-            <input type="text" placeholder="Search...">
+    <div id="main-page" class="page">
+        <div class="container">
+            <h1 class="title">HEX<br>Code Organizer</h1>
+            <input type="text" class="search" placeholder="Search...">
+            
             <div class="last-used">
-                <h2>Last used</h2>
-                <div class="hex-preview">#1F1F22</div>
-                <div class="hex-preview">#2A2D31</div>
-                <div class="hex-preview">#313339</div>
-                <div class="hex-preview">#FCFCFC</div>
+                <p class="section-title">Last used</p>
+                <div class="color-preview">
+                    <div class="color-box" style="background-color: #1F1F22;"></div>
+                    <div class="color-box" style="background-color: #2A2D31;"></div>
+                    <div class="color-box" style="background-color: #313339;"></div>
+                    <div class="color-box" style="background-color: #FE6057;"></div>
+                    <div class="color-box" style="background-color: #FFD700;"></div>
+                    <div class="color-box" style="background-color: #22A55A;"></div>
+                </div>
+                <p class="folder-name">Discord</p>
             </div>
-            <div class="list">
-                <h2>List</h2>
-                <select>
-                    <option>Sort by</option>
-                    <option>Date of creation</option>
-                    <option>Alphabetical</option>
-                </select>
-                <div class="hex-folder">Discord</div>
+    
+            <div class="folder-list">
+                <p class="section-title">List</p>
+                <div class="sort-by">
+                    <p>Sort by</p>
+                    <select>
+                        <option>Name</option>
+                        <option>Date</option>
+                    </select>
+                </div>
             </div>
-            <button class="create-new">+</button>
         </div>
-        <div class="details">
-            <h2>Folder Details</h2>
-            <!-- Folder details go here -->
-        </div>
-        <div class="creation">
-            <h2>Create a new folder</h2>
-            <input type="text" placeholder="Name">
-            <input type="text" placeholder="Description">
-            <input type="text" placeholder="Hex Code">
-            <button class="add-hex">+</button>
-            <button class="create">Create</button>
+        <div class="add-button" onclick="openCreateFolder()">+</div>
+    </div>
+
+    <div id="folder-page" class="page hidden">
+        <div class="container">
+            <button class="back-button" onclick="goBack()">←</button>
+            <h1 class="title">HEX Code Organizer</h1>
+            <p class="folder-name" id="folder-name-display">Discord</p>
+            <div class="color-list" id="color-list">
+                <!-- Hex code color items will be dynamically inserted here -->
+            </div>
         </div>
     </div>
+
+    <div id="create-folder-page" class="page hidden">
+        <div class="container">
+            <button class="back-button" onclick="goBack()">←</button>
+            <h1 class="title">HEX Code Organizer</h1>
+            <h2>Create a new folder</h2>
+            <form id="create-folder-form" onsubmit="createFolder(event)">
+                <label for="folder-name">Name</label>
+                <input type="text" id="folder-name" name="folder-name" required>
+                <label for="folder-description">Description</label>
+                <input type="text" id="folder-description" name="folder-description">
+                <label for="hex-code">Hex Code</label>
+                <input type="text" id="hex-code" name="hex-code" required>
+                <div class="add-hex-button" onclick="addHexCode()">+</div>
+                <button type="submit" class="create-button">Create</button>
+            </form>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
