@@ -33,6 +33,13 @@ body {
     margin-bottom: 20px;
 }
 
+.last-used-folder {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #444;
+    color: #fff;
+}
+
 .color-preview {
     display: flex;
 }
@@ -50,8 +57,14 @@ body {
 }
 
 .folder {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 10px;
     cursor: pointer;
+    padding: 10px;
+    background-color: #444;
+    border-radius: 5px;
 }
 
 .sort-by {
@@ -150,5 +163,14 @@ body {
     border: none;
     border-radius: 5px;
     color: #fff;
+    cursor: pointer;
+}
+
+.delete-button {
+    background-color: #E74C3C;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
     cursor: pointer;
 }
