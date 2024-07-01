@@ -37,11 +37,13 @@
     <div id="folder-page" class="page hidden">
         <div class="container">
             <button class="back-button" onclick="goBack()">←</button>
-            <h1 class="title">HEX Code Organizer</h1>
-            <p class="folder-name" id="folder-name-display">Folder Name</p>
+            <h1 class="title" id="folder-page-title">Folder Name</h1>
+            <p class="description" id="folder-description-display">Description</p>
             <div class="color-list" id="color-list">
                 <!-- Hex code color items will be dynamically inserted here -->
             </div>
+            <button class="edit-button" onclick="editFolder()">Edit Folder</button>
+            <button class="delete-button" onclick="deleteCurrentFolder()">Delete Folder</button>
         </div>
     </div>
 
@@ -56,8 +58,11 @@
                 <label for="folder-description">Description</label>
                 <input type="text" id="folder-description" name="folder-description">
                 <label for="hex-code">Hex Code</label>
-                <input type="text" id="hex-code" name="hex-code" required>
-                <div class="add-hex-button" onclick="addHexCode()">+</div>
+                <div class="hex-code-input-group">
+                    <input type="text" id="hex-code" name="hex-code" required>
+                    <button type="button" class="accept-hex-button" onclick="acceptHexCode()">Accept</button>
+                </div>
+                <div class="hex-codes-container" id="hex-codes-container"></div>
                 <button type="submit" class="create-button">Create</button>
             </form>
         </div>
