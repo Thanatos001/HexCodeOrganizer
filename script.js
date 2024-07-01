@@ -193,11 +193,11 @@ function createFolder(event) {
     // Save updated folder list back to local storage
     localStorage.setItem('folders', JSON.stringify(folders));
 
-    // Go back to the main page
-    goBack();
-
     // Refresh the main page to display the new folder
     displayFolders();
+    
+    // Go back to the main page
+    goBack();
 }
 
 function saveFolder() {
@@ -251,9 +251,9 @@ function displayFolders() {
 
         folder.hexCodes.forEach(hexCode => {
             let colorBoxDiv = document.createElement('div');
-            colorBoxDiv.className = 'color-box';
-            colorBoxDiv.style.backgroundColor = hexCode;
-            colorPreviewDiv.appendChild(colorBoxDiv);
+                colorBoxDiv.className = 'color-box';
+                colorBoxDiv.style.backgroundColor = hexCode;
+                colorPreviewDiv.appendChild(colorBoxDiv);
 });
 
 let folderNameP = document.createElement('p');
@@ -265,6 +265,7 @@ folderDiv.appendChild(folderNameP);
 folderList.appendChild(folderDiv);
 });
 
+// Add click event to last used folder container
 const lastUsedContainer = document.getElementById('last-used-folder');
 lastUsedContainer.onclick = () => {
     const lastUsed = localStorage.getItem('lastUsed');
