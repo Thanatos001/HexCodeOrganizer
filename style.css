@@ -6,7 +6,7 @@ body {
 }
 
 .container {
-    padding: 20px;
+    padding: 10px 20px; /* Reduced padding */
 }
 
 .title {
@@ -107,7 +107,7 @@ body {
     color: #fff;
     font-size: 2em;
     cursor: pointer;
-    margin-bottom: 20px;
+    margin: 10px 0; /* Reduced margin */
 }
 
 .color-list {
@@ -143,18 +143,19 @@ body {
     color: #fff;
 }
 
-.add-hex-button {
-    width: 50px;
-    height: 50px;
-    background-color: #22A55A;
-    border-radius: 50%;
+.hex-code-input-group {
     display: flex;
-    justify-content: center;
     align-items: center;
-    font-size: 2em;
+}
+
+.accept-hex-button {
+    margin-left: 10px;
+    padding: 10px;
+    background-color: #22A55A;
+    border: none;
+    border-radius: 5px;
     color: #fff;
     cursor: pointer;
-    margin: 10px 0;
 }
 
 .create-button {
@@ -166,11 +167,22 @@ body {
     cursor: pointer;
 }
 
+.edit-button {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #2980B9;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+}
+
 .delete-button {
+    margin-top: 10px;
     background-color: #E74C3C;
     color: #fff;
     border: none;
     border-radius: 5px;
-    padding: 5px 10px;
+    padding: 10px;
     cursor: pointer;
 }
