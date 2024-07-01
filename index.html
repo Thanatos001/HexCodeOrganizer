@@ -42,7 +42,7 @@
             <div class="color-list" id="color-list">
                 <!-- Hex code color items will be dynamically inserted here -->
             </div>
-            <button class="edit-button" onclick="editFolder()">Edit Folder</button>
+            <button class="edit-button" onclick="openEditFolder()">Edit Folder</button>
             <button class="delete-button" onclick="deleteCurrentFolder()">Delete Folder</button>
         </div>
     </div>
@@ -59,12 +59,22 @@
                 <input type="text" id="folder-description" name="folder-description">
                 <label for="hex-code">Hex Code</label>
                 <div class="hex-code-input-group">
-                    <input type="text" id="hex-code" name="hex-code" required>
+                    <input type="text" id="hex-code" name="hex-code">
                     <button type="button" class="accept-hex-button" onclick="acceptHexCode()">Accept</button>
                 </div>
                 <div class="hex-codes-container" id="hex-codes-container"></div>
                 <button type="submit" class="create-button">Create</button>
             </form>
+        </div>
+    </div>
+
+    <div id="edit-folder-page" class="page hidden">
+        <div class="container">
+            <button class="back-button" onclick="goBack()">←</button>
+            <h1 class="title">Edit Folder</h1>
+            <div class="hex-codes-container" id="edit-hex-codes-container"></div>
+            <button class="add-hex-button" onclick="addHexCodeInput()">Add Hex Code</button>
+            <button class="save-button" onclick="saveFolder()">Save</button>
         </div>
     </div>
 
