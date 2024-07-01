@@ -256,11 +256,13 @@ function displayFolders() {
             colorPreviewDiv.appendChild(colorBoxDiv);
         });
 
-       let folderNameP = document.createElement('p');
+        let folderNameP = document.createElement('p');
             folderNameP.className = 'folder-name';
-            folderNameP.textContent = folder.name; // Add this line to complete the assignment
+            folderNameP.textContent = folder.name;
             folderDiv.appendChild(folderNameP);
-        
+    });
+}
+
 function updateLastUsedFolder() {
     const lastUsed = localStorage.getItem('lastUsed');
     const lastUsedContainer = document.getElementById('last-used-folder');
