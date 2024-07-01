@@ -254,69 +254,80 @@ function displayFolders() {
             colorBoxDiv.className = 'color-box';
             colorBoxDiv.style.backgroundColor = hexCode;
             colorPreviewDiv.appendChild(colorBoxDiv);
-        });
+});
 
-        let folderNameP = document.createElement('p');
-            folderNameP.className = 'folder-name';
-            folderNameP.textContent = folder.name;
-            folderDiv.appendChild(folderNameP);
-    });
+let folderNameP = document.createElement('p');
+folderNameP.className = 'folder-name';
+folderNameP.textContent = folder.name;
+folderDiv.appendChild(colorPreviewDiv);
+folderDiv.appendChild(folderNameP);
+
+folderList.appendChild(folderDiv);
+});
+
+const lastUsedContainer = document.getElementById('last-used-folder');
+lastUsedContainer.onclick = () => {
+    const lastUsed = localStorage.getItem('lastUsed');
+    if (lastUsed) {
+        openFolder(lastUsed);
+    }
+};
 }
 
 function updateLastUsedFolder() {
-    const lastUsed = localStorage.getItem('lastUsed');
-    const lastUsedContainer = document.getElementById('last-used-folder');
+const lastUsed = localStorage.getItem('lastUsed');
+const lastUsedContainer = document.getElementById('last-used-folder');
 
-    if (lastUsed) {
-        const folders = JSON.parse(localStorage.getItem('folders')) || [];
-        const folder = folders.find(f => f.name === lastUsed);
+if (lastUsed) {
+    const folders = JSON.parse(localStorage.getItem('folders')) || [];
+    const folder = folders.find(f => f.name === lastUsed);
 
-        if (folder) {
-            lastUsedContainer.innerHTML = `
-                <p class="folder-name">${folder.name}</p>
-                <div class="color-preview">
-                    ${folder.hexCodes.map(hexCode => `<div class="color-box" style="background-color: ${hexCode};"></div>`).join('')}
-                </div>
-            `;
-        } else {
-            lastUsedContainer.innerHTML = `<p>No recent folder used</p>`;
-        }
+    if (folder) {
+        lastUsedContainer.innerHTML = `
+            <p class="folder-name">${folder.name}</p>
+            <div class="color-preview">
+                ${folder.hexCodes.map(hexCode => `<div class="color-box" style="background-color: ${hexCode};"></div>`).join('')}
+            </div>
+        `;
     } else {
         lastUsedContainer.innerHTML = `<p>No recent folder used</p>`;
     }
+} else {
+    lastUsedContainer.innerHTML = `<p>No recent folder used</p>`;
+}
 }
 
 function searchFolders() {
-    const query = document.getElementById('search').value.toLowerCase();
-    const folders = JSON.parse(localStorage.getItem('folders')) || [];
-    const filteredFolders = folders.filter(folder => folder.name.toLowerCase().includes(query));
-    const folderList = document.getElementById('folders-container');
-    folderList.innerHTML = ''; // Clear existing folders
+const query = document.getElementById('search').value.toLowerCase();
+const folders = JSON.parse(localStorage.getItem('folders')) || [];
+const filteredFolders = folders.filter(folder => folder.name.toLowerCase().includes(query));
+const folderList = document.getElementById('folders-container');
+folderList.innerHTML = ''; // Clear existing folders
 
-    filteredFolders.forEach(folder => {
-        let folderDiv = document.createElement('div');
-        folderDiv.className = 'folder';
-        folderDiv.onclick = () => openFolder(folder.name);
+filteredFolders.forEach(folder => {
+    let folderDiv = document.createElement('div');
+    folderDiv.className = 'folder';
+    folderDiv.onclick = () => openFolder(folder.name);
 
-        let colorPreviewDiv = document.createElement('div');
-        colorPreviewDiv.className = 'color-preview';
+    let colorPreviewDiv = document.createElement('div');
+    colorPreviewDiv.className = 'color-preview';
 
-        folder.hexCodes.forEach(hexCode => {
-            let colorBoxDiv = document.createElement('div');
-            colorBoxDiv.className = 'color-box';
-            colorBoxDiv.style.backgroundColor = hexCode;
-            colorPreviewDiv.appendChild(colorBoxDiv);
-        });
-
-        let folderNameP = document.createElement('p');
-        folderNameP.className = 'folder-name';
-        folderNameP.textContent = folder.name;
-
-        folderDiv.appendChild(colorPreviewDiv);
-        folderDiv.appendChild(folderNameP);
-
-        folderList.appendChild(folderDiv);
+    folder.hexCodes.forEach(hexCode => {
+        let colorBoxDiv = document.createElement('div');
+        colorBoxDiv.className = 'color-box';
+        colorBoxDiv.style.backgroundColor = hexCode;
+        colorPreviewDiv.appendChild(colorBoxDiv);
     });
+
+    let folderNameP = document.createElement('p');
+    folderNameP.className = 'folder-name';
+    folderNameP.textContent = folder.name;
+
+    folderDiv.appendChild(colorPreviewDiv);
+    folderDiv.appendChild(folderNameP);
+
+    folderList.appendChild(folderDiv);
+});
 }
 
 // Call updateLastUsedFolder on page load to display the last used folder
