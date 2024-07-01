@@ -111,17 +111,17 @@ body {
     margin-left: 10px;
 }
 
-.create-folder-form {
+#create-folder-form {
     display: flex;
     flex-direction: column;
 }
 
-.create-folder-form label {
+#create-folder-form label {
     margin-top: 10px;
     margin-bottom: 5px;
 }
 
-.create-folder-form input {
+#create-folder-form input {
     padding: 10px;
     margin-bottom: 10px;
     border: none;
