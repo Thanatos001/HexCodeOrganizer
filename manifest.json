@@ -1,8 +1,15 @@
 {
     "name": "HEX Code Organizer",
-    "short_name": "HEX Organizer",
-    "start_url": "index.html",
+    "short_name": "HexOrganizer",
+    "start_url": ".",
     "display": "standalone",
     "background_color": "#333",
-    "description": "Organize your HEX color codes easily."
+    "theme_color": "#333",
+    "icons": [
+        {
+            "src": "icon.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ]
 }
