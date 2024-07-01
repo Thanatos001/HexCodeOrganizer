@@ -12,7 +12,8 @@ function openFolder(folderName) {
     const folder = folders.find(f => f.name === folderName);
 
     if (folder) {
-        document.getElementById('folder-name-display').textContent = folder.name;
+        document.getElementById('folder-page-title').textContent = folder.name;
+        document.getElementById('folder-description-display').textContent = folder.description || '';
         const colorList = document.getElementById('color-list');
         colorList.innerHTML = ''; // Clear existing colors
 
@@ -46,6 +47,12 @@ function openFolder(folderName) {
 function openCreateFolder() {
     document.getElementById('main-page').classList.add('hidden');
     document.getElementById('create-folder-page').classList.remove('hidden');
+    
+    // Clear previous folder data
+    document.getElementById('folder-name').value = '';
+    document.getElementById('folder-description').value = '';
+    document.getElementById('hex-code').value = '';
+    document.getElementById('hex-codes-container').innerHTML = '';
 }
 
 function goBack() {
@@ -67,13 +74,37 @@ function addHexCode() {
     document.getElementById('create-folder-form').insertBefore(hexCodeInput, document.querySelector('.add-hex-button'));
 }
 
+function acceptHexCode() {
+    const hexCodeInput = document.getElementById('hex-code');
+    const hexCode = hexCodeInput.value.trim();
+
+    if (hexCode) {
+        const hexCodeDiv = document.createElement('div');
+        hexCodeDiv.className = 'color-item';
+
+        const colorBox = document.createElement('div');
+        colorBox.className = 'color-box';
+        colorBox.style.backgroundColor = hexCode;
+
+        const colorCode = document.createElement('p');
+        colorCode.className = 'color-code';
+        colorCode.textContent = hexCode;
+
+        hexCodeDiv.appendChild(colorBox);
+        hexCodeDiv.appendChild(colorCode);
+
+        document.getElementById('hex-codes-container').appendChild(hexCodeDiv);
+        hexCodeInput.value = ''; // Clear the input
+    }
+}
+
 function createFolder(event) {
     event.preventDefault();
     
     // Get form data
     const folderName = document.getElementById('folder-name').value;
     const folderDescription = document.getElementById('folder-description').value;
-    const hexCodes = Array.from(document.querySelectorAll('input[name="hex-code"]')).map(input => input.value);
+    const hexCodes = Array.from(document.querySelectorAll('.color-item .color-code')).map(item => item.textContent);
 
     // Create new folder object
     const newFolder = {
@@ -130,17 +161,8 @@ function displayFolders() {
         folderNameP.className = 'folder-name';
         folderNameP.textContent = folder.name;
 
-        let deleteButton = document.createElement('button');
-        deleteButton.className = 'delete-button';
-        deleteButton.textContent = 'Delete';
-        deleteButton.onclick = (e) => {
-            e.stopPropagation();
-            deleteFolder(folder.name);
-        };
-
         folderDiv.appendChild(colorPreviewDiv);
         folderDiv.appendChild(folderNameP);
-        folderDiv.appendChild(deleteButton);
 
         folderList.appendChild(folderDiv);
     });
@@ -195,20 +217,17 @@ function searchFolders() {
         folderNameP.className = 'folder-name';
         folderNameP.textContent = folder.name;
 
-        let deleteButton = document.createElement('button');
-        deleteButton.className = 'delete-button';
-        deleteButton.textContent = 'Delete';
-        deleteButton.onclick = (e) => {
-            e.stopPropagation();
-            deleteFolder(folder.name);
-        };
-
         folderDiv.appendChild(colorPreviewDiv);
         folderDiv.appendChild(folderNameP);
-        folderDiv.appendChild(deleteButton);
 
         folderList.appendChild(folderDiv);
     });
+}
+
+function deleteCurrentFolder() {
+    const folderName = document.getElementById('folder-page-title').textContent;
+    deleteFolder(folderName);
+    goBack();
 }
 
 function deleteFolder(folderName) {
@@ -217,6 +236,40 @@ function deleteFolder(folderName) {
     localStorage.setItem('folders', JSON.stringify(folders));
     displayFolders();
     updateLastUsedFolder();
+}
+
+function editFolder() {
+    const folderName = document.getElementById('folder-page-title').textContent;
+    const folders = JSON.parse(localStorage.getItem('folders')) || [];
+    const folder = folders.find(f => f.name === folderName);
+
+    if (folder) {
+        document.getElementById('folder-name').value = folder.name;
+        document.getElementById('folder-description').value = folder.description;
+        const hexCodesContainer = document.getElementById('hex-codes-container');
+        hexCodesContainer.innerHTML = ''; // Clear existing hex codes
+
+        folder.hexCodes.forEach(hexCode => {
+            const hexCodeDiv = document.createElement('div');
+            hexCodeDiv.className = 'color-item';
+
+            const colorBox = document.createElement('div');
+            colorBox.className = 'color-box';
+            colorBox.style.backgroundColor = hexCode;
+
+            const colorCode = document.createElement('p');
+            colorCode.className = 'color-code';
+            colorCode.textContent = hexCode;
+
+            hexCodeDiv.appendChild(colorBox);
+            hexCodeDiv.appendChild(colorCode);
+
+            hexCodesContainer.appendChild(hexCodeDiv);
+        });
+
+        document.getElementById('main-page').classList.add('hidden');
+        document.getElementById('create-folder-page').classList.remove('hidden');
+    }
 }
 
 // Call updateLastUsedFolder on page load to display the last used folder
