@@ -10,30 +10,25 @@
     <div id="main-page" class="page">
         <div class="container">
             <h1 class="title">HEX<br>Code Organizer</h1>
-            <input type="text" class="search" placeholder="Search...">
+            <input type="text" class="search" id="search" placeholder="Search..." oninput="searchFolders()">
             
             <div class="last-used">
                 <p class="section-title">Last used</p>
-                <div class="color-preview">
-                    <div class="color-box" style="background-color: #1F1F22;"></div>
-                    <div class="color-box" style="background-color: #2A2D31;"></div>
-                    <div class="color-box" style="background-color: #313339;"></div>
-                    <div class="color-box" style="background-color: #FE6057;"></div>
-                    <div class="color-box" style="background-color: #FFD700;"></div>
-                    <div class="color-box" style="background-color: #22A55A;"></div>
+                <div class="last-used-folder" id="last-used-folder">
+                    <p>No recent folder used</p>
                 </div>
-                <p class="folder-name">Discord</p>
             </div>
     
             <div class="folder-list">
                 <p class="section-title">List</p>
                 <div class="sort-by">
                     <p>Sort by</p>
-                    <select>
-                        <option>Name</option>
-                        <option>Date</option>
+                    <select id="sort-options" onchange="displayFolders()">
+                        <option value="alphabetical">Alphabetical</option>
+                        <option value="lastCreated">Last Created</option>
                     </select>
                 </div>
+                <div id="folders-container"></div>
             </div>
         </div>
         <div class="add-button" onclick="openCreateFolder()">+</div>
@@ -43,7 +38,7 @@
         <div class="container">
             <button class="back-button" onclick="goBack()">←</button>
             <h1 class="title">HEX Code Organizer</h1>
-            <p class="folder-name" id="folder-name-display">Discord</p>
+            <p class="folder-name" id="folder-name-display">Folder Name</p>
             <div class="color-list" id="color-list">
                 <!-- Hex code color items will be dynamically inserted here -->
             </div>
@@ -71,4 +66,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
